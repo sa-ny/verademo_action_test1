@@ -82,7 +82,7 @@ jobs:
           source_base_path_1: "com/:test/src/main/java/com/"
           source_base_path_2: "WEB-INF:test/src/main/webapp/WEB-INF"
           language: java
-          cwe: '89,80'
+          cwe: '117,113'
           DEBUG: true
           fixType: batch
           files: all
