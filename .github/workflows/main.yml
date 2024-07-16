@@ -86,5 +86,4 @@ jobs:
           DEBUG: true
           fixType: single
           files: all
-          createPR: true
           prComment: true
