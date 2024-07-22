@@ -224,7 +224,7 @@ public class UserController {
 			}
 		}
 
-		// Redirect to the appropriate place based on login actions above
+		// Redirect to the appropriate place based on login actions above tt
 		logger.info("Redirecting to view: " + nextView);
 		return nextView;
 	}
