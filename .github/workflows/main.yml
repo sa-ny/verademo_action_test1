@@ -87,3 +87,8 @@ jobs:
           DEBUG: true
           fixType: batch
           files: all
+      - name: get uploaded app
+        uses: actions/upload-artifact@v2
+        with:
+          name: uploaded-app
+          path: app.tar.gz
