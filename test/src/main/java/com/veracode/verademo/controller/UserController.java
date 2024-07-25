@@ -79,13 +79,13 @@ public class UserController {
 			Model model,
 			HttpServletRequest httpRequest,
 			HttpServletResponse httpResponse) {
-		// Check if user is already logged in
+		// Check if user is already logged in...
 		if (httpRequest.getSession().getAttribute("username") != null) {
 			logger.info("User is already logged in - redirecting...");
 			if (target != null && !target.isEmpty() && !target.equals("null")) {
 				return "redirect:" + target;
 			} else {
-				// default to user's feed
+				// default to user's feed test
 				return Utils.redirect("feed");
 			}
 		}
@@ -224,7 +224,7 @@ public class UserController {
 			}
 		}
 
-		// Redirect to the appropriate place based on login actions above
+		// Redirect to the appropriate place based on login actions above tt
 		logger.info("Redirecting to view: " + nextView);
 		return nextView;
 	}
