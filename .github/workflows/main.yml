@@ -82,13 +82,17 @@ jobs:
           source_base_path_1: "com/:test/src/main/java/com/"
           source_base_path_2: "WEB-INF:test/src/main/webapp/WEB-INF"
           language: java
-          prComment: true
-          cwe: '89,117'
-          DEBUG: true
+          createPR: true
+          cwe: '89,117,209'
+          
           fixType: batch
           files: all
+
+          prComment: true
+
       - name: get uploaded app
         uses: actions/upload-artifact@v2
         with:
           name: uploaded-app
           path: app.tar.gz
+
