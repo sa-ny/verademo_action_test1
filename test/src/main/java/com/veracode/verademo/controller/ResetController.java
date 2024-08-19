@@ -118,7 +118,7 @@ public class ResetController {
 			}
 			connect.commit();
 
-			// Add the listeners
+			// Add the listeners.
 			logger.info("Preparing the Stetement for adding listeners");
 			listenersStatement = connect
 					.prepareStatement("INSERT INTO listeners (blabber, listener, status) values (?, ?, 'Active');");

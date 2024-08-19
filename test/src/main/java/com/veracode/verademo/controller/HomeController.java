@@ -16,7 +16,7 @@ public class HomeController {
 	public String renderGet(Model model, HttpServletRequest request, HttpServletResponse response) {
 		// Check if user is already logged in.sa,
 		if (Utils.getSessionUserName(request, response) != null) {
-			// Redirect to user's feed..
+			// Redirect to user's feed.
 			return Utils.redirect("feed");
 		}
 
