@@ -14,10 +14,6 @@ import java.util.Random;
 
 import javax.servlet.ServletContext;
 
-import com.veracode.verademo.utils.Constants;
-import com.veracode.verademo.utils.User;
-import com.veracode.verademo.utils.Utils;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +23,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.veracode.verademo.utils.Constants;
+import com.veracode.verademo.utils.User;
+import com.veracode.verademo.utils.Utils;
 
 @Controller
 @Scope("request")
@@ -89,7 +89,7 @@ public class ResetController {
 
 		Random rand = new Random();
 
-		// Drop existing tables and recreate from schema file
+		// Drop existing tables and recreate from schema file..
 		recreateDatabaseSchema();
 
 		try {
