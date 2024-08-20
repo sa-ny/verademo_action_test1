@@ -74,7 +74,7 @@ jobs:
           
       - name: Create fixes from static findings
         id: convert
-        uses: Veracode/veracode-fix@feature/qa-testing-branch
+        uses: Veracode/veracode-fix@qa-testing-branch
         with:
           inputFile: results.json
           vid: ${{ secrets.VID }}
