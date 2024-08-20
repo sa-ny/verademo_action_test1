@@ -87,7 +87,7 @@ jobs:
           
           fixType: batch
           files: all
-
+          debug: true
           prComment: true
 
       - name: get uploaded app
