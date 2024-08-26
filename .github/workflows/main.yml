@@ -35,7 +35,7 @@ jobs:
   pipeline_scan:
       needs: build
       runs-on: ubuntu-latest
-      name: pipeline scan
+      name: veracode pipeline scan
       steps:
         - name: checkout repo
           uses: actions/checkout@v3
@@ -62,7 +62,7 @@ jobs:
   veracode-fix:
     runs-on: ubuntu-latest
     needs: pipeline_scan
-    name: create fixes
+    name: veracode fix
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
