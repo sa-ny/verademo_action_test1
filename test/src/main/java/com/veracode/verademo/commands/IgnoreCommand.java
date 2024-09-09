@@ -33,7 +33,7 @@ public class IgnoreCommand implements BlabberCommand {
 			action.setString(1, blabberUsername);
 			action.setString(2, username);
 			action.execute();
-
+			//.. test
 			sqlQuery = "SELECT blab_name FROM users WHERE username = '" + blabberUsername + "'";
 			Statement sqlStatement = connect.createStatement();
 			logger.info(sqlQuery);
