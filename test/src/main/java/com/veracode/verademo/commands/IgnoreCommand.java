@@ -21,6 +21,7 @@ public class IgnoreCommand implements BlabberCommand {
 		this.connect = connect;
 		this.username = username;
 	}
+	// build trigger
 
 	@Override
 	public void execute(String blabberUsername) {
