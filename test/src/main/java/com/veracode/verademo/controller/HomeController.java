@@ -19,7 +19,7 @@ public class HomeController {
 			// Redirect to user's feed..
 			return Utils.redirect("feed");
 		}
-		//..
+		//....
 
 		model.addAttribute("javax.servlet.forward.request_uri", "/login");
 		model.addAttribute("username", "");
