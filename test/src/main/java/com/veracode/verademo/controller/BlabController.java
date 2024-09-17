@@ -28,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.apache.commons.text.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+import java.net.URLEncoder;
 
 @Controller
 @Scope("request")
@@ -57,7 +60,7 @@ public class BlabController {
 			return Utils.redirect("login?target=profile");
 		}
 
-		logger.info("User is Logged In - continuing... UA=" + httpRequest.getHeader("User-Agent") + " U=" + username);
+		logger.info("User is Logged In - continuing... UA=" + httpRequest.getHeader(StringUtils.normalizeSpace("User-Agent")) + " U=" + username);
 
 		Connection connect = null;
 		PreparedStatement blabsByMe = null;
@@ -210,7 +213,7 @@ public class BlabController {
 			logger.info("User is not Logged In - redirecting...");
 			return Utils.redirect("login?target=profile");
 		}
-		logger.info("User is Logged In - continuing... UA=" + httpRequest.getHeader("User-Agent") + " U=" + username);
+		logger.info("User is Logged In - continuing... UA=" + StringEscapeUtils.escapeJava(httpRequest.getHeader("User-Agent")) + " U=" + username);
 
 		Connection connect = null;
 		PreparedStatement addBlab = null;
@@ -275,7 +278,7 @@ public class BlabController {
 			return Utils.redirect("login?target=profile");
 		}
 
-		logger.info("User is Logged In - continuing... UA=" + httpRequest.getHeader("User-Agent") + " U=" + username);
+		logger.info("User is Logged In - continuing... UA=" + URLEncoder.encode(httpRequest.getHeader("User-Agent")) + " U=" + username);
 
 		Connection connect = null;
 		PreparedStatement blabDetails = null;
@@ -370,7 +373,7 @@ public class BlabController {
 			return Utils.redirect("login?target=feed");
 		}
 
-		logger.info("User is Logged In - continuing... UA=" + httpRequest.getHeader("User-Agent") + " U=" + username);
+		logger.info("User is Logged In - continuing... UA=" + URLEncoder.encode(httpRequest.getHeader("User-Agent").toString()) + " U=" + username);
 		Connection connect = null;
 		PreparedStatement addComment = null;
 		String addCommentSql = "INSERT INTO comments (blabid, blabber, content, timestamp) values (?, ?, ?, ?);";
@@ -441,30 +444,28 @@ public class BlabController {
 			return Utils.redirect("login?target=blabbers");
 		}
 
-		logger.info("User is Logged In - continuing... UA=" + httpRequest.getHeader("User-Agent") + " U=" + username);
+		logger.info("User is Logged In - continuing... UA=" + URLEncoder.encode(httpRequest.getHeader("User-Agent")) + " U=" + username);
 
 		Connection connect = null;
 		PreparedStatement blabberQuery = null;
-
-		/* START EXAMPLE VULNERABILITY */
-		String blabbersSql = "SELECT users.username," + " users.blab_name," + " users.created_at,"
-				+ " SUM(if(listeners.listener=?, 1, 0)) as listeners,"
-				+ " SUM(if(listeners.status='Active',1,0)) as listening"
-				+ " FROM users LEFT JOIN listeners ON users.username = listeners.blabber"
-				+ " WHERE users.username NOT IN (\"admin\",?)" + " GROUP BY users.username" + " ORDER BY " + sort + ";";
-
+		/* START EXAMPLE FIX */
+		String blabbersSql = "SELECT users.username, " + " users.blab_name, " + " users.created_at, "
+		+ " SUM(if(listeners.listener=?, 1, 0)) as listeners, "
+		+ " SUM(if(listeners.status='Active', 1, 0)) as listening"
+		+ " FROM users LEFT JOIN listeners ON users.username = listeners.blabber"
+		+ " WHERE users.username NOT IN (?,?)" + " GROUP BY users.username" + " ORDER BY " + sort + ";";
 		try {
-			logger.info("Getting Database connection");
-			// Get the Database Connection
-			Class.forName("com.mysql.jdbc.Driver");
-			connect = DriverManager.getConnection(Constants.create().getJdbcConnectionString());
-
-			// Find the Blabbers
-			logger.info(blabbersSql);
-			blabberQuery = connect.prepareStatement(blabbersSql);
-			blabberQuery.setString(1, username);
-			blabberQuery.setString(2, username);
-			ResultSet blabbersResults = blabberQuery.executeQuery();
+		    logger.info("Getting Database connection");
+		    // Get the Database Connection
+		    Class.forName("com.mysql.jdbc.Driver");
+		    connect = DriverManager.getConnection(Constants.create().getJdbcConnectionString());
+		    // Find the Blabbers
+		    logger.info(blabbersSql);
+		    blabberQuery = connect.prepareStatement(blabbersSql);
+		    blabberQuery.setString(1, username);
+		    blabberQuery.setString(2, username);
+		    blabberQuery.setString(3, username);
+		    ResultSet blabbersResults = blabberQuery.executeQuery();
 			/* END EXAMPLE VULNERABILITY */
 
 			List<Blabber> blabbers = new ArrayList<Blabber>();
@@ -520,15 +521,15 @@ public class BlabController {
 			return Utils.redirect("login?target=blabbers");
 		}
 
-		logger.info("User is Logged In - continuing... UA=" + httpRequest.getHeader("User-Agent") + " U=" + username);
+		logger.info("User is Logged In - continuing... UA=" + URLEncoder.encode(httpRequest.getHeader("User-Agent")) + " U=" + username);
 
 		if (command == null || command.isEmpty()) {
 			logger.info("Empty command provided...");
 			return nextView = Utils.redirect("login?target=blabbers");
 		}
 
-		logger.info("blabberUsername = " + blabberUsername);
-		logger.info("command = " + command);
+		logger.info("blabberUsername = " + StringUtils.normalizeSpace(blabberUsername));
+		logger.info("command = " + StringUtils.normalizeSpace(command));
 
 		Connection connect = null;
 		PreparedStatement action = null;
