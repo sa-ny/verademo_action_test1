@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.apache.commons.lang3.StringUtils;
 
 //..
 
@@ -26,7 +27,7 @@ public class IgnoreCommand implements BlabberCommand {
 
 	@Override
 	public void execute(String blabberUsername) {
-		String sqlQuery = "DELETE FROM listeners WHERE blabber=? AND listener=?;";
+		String sqlQuery = StringUtils.normalizeSpace("DELETE FROM listeners WHERE blabber=? AND listener=?;");
 		logger.info(sqlQuery);
 		PreparedStatement action;
 		try {
@@ -43,10 +44,11 @@ public class IgnoreCommand implements BlabberCommand {
 			result.next();
 
 			/* START EXAMPLE VULNERABILITY */
-			String event = username + " is now ignoring " + blabberUsername + " (" + result.getString(1) + ")";
+			String event = username + " is now ignoring " + blabberUsername + " (?)";
 			sqlQuery = "INSERT INTO users_history (blabber, event) VALUES (\"" + username + "\", \"" + event + "\")";
 			logger.info(sqlQuery);
 			sqlStatement.execute(sqlQuery);
+			statement.setString(1, result. getString ( 1 ));
 			/* END EXAMPLE VULNERABILITY */
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
