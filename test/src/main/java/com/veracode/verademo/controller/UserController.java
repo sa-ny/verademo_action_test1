@@ -42,7 +42,7 @@ public class UserController {
 		if (target == null) {
 			target = "";
 		}
-		//..
+		//...
 
 		logger.info("Entering showLogin with username " + username + " and target " + target);
 
