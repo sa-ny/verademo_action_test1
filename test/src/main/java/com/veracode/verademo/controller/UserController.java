@@ -32,7 +32,7 @@ public class UserController {
 			Model model,
 			HttpServletRequest httpRequest,
 			HttpServletResponse httpResponse) {
-		// Check if user is already logged in
+		// Check if user is already logged in.
 
 
 		if (username == null) {
