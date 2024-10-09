@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * @author johnadmin
@@ -44,7 +45,7 @@ public class UserController {
 		}
 		//...
 
-		logger.info("Entering showLogin with username " + username + " and target " + target);
+		logger.info("Entering showLogin with username " + StringEscapeUtils.escapeJava(username) + " and target " + target);
 
 		model.addAttribute("username", username);
 		model.addAttribute("target", target);
