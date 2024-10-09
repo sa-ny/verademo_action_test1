@@ -111,7 +111,7 @@ public class UserController {
 		if (target == null) {
 			target = "";
 		}
-
+		//test
 		logger.info("Entering showLogin with username " + username + " and target " + target);
 
 		model.addAttribute("username", username);
