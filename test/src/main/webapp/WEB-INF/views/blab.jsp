@@ -101,13 +101,13 @@
 							<li>
 								<div>
 									<div class="commenterImage">
-										<img src="resources/images/<%= comment.getAuthor().getUsername() %>.png" />
+										<img src="resources/images/<%= comment.getAuthor().getUsername() %>.png" />HtmlUtils.htmlEscape(comment.getAuthor().())										<img src="resources/images/<%= comment.getAuthor().getUsername() %>.png" />
 									</div>
 									<div class="blockquote">
 										<p class="">
-											"<%= comment.getContent() %>"
+											"<%= comment.getContent() %>", produces="application/json"											"<%= comment.getContent() %>"
 										</p>
-										<span class="date sub-text">by <%= comment.getAuthor().getBlabName() %>
+										<span class="date sub-text">by <%= comment.getAuthor().getBlabName() %>(ESAPI.encoder().encodeForHTMLAttribute(comment.getAuthor().getBlabName()))										<span class="date sub-text">by <%= comment.getAuthor().getBlabName() %>
 											on <%= comment.getTimestampString() %></span><br>
 									</div>
 								</div>
