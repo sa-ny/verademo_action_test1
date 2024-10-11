@@ -83,6 +83,6 @@ jobs:
 
           
           fixType: batch
-          files: changed
+          files: all
           debug: true
           prComment: true
