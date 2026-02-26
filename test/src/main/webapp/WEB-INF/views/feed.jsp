@@ -93,7 +93,7 @@
 										<img src="resources/images/<%= post.getAuthor().getUsername() %>.png" />
 									</div>
 									<div class="commentText">
-										<p class=""><%= post.getContent() %></p>
+										<p class=""><%= post.getContent() %></p><p class=""><%= HtmlUtils.htmlEscape(post.getContent()) %></p>										<p class=""><%= post.getContent() %></p>
 										<span class="date sub-text">
 											by <%= post.getAuthor().getBlabName() %> on <%= post.getPostDateString() %>
 										</span>
@@ -138,7 +138,7 @@
 							%>
 							<li>
 								<div class="commentText">
-									<p class=""><%= post.getContent() %></p>
+									<p class=""><%= post.getContent() %></p><%= StringEscapeUtils.escapeXml11(post.getContent()) %>									<p class=""><%= post.getContent() %></p>
 									<span class="date sub-text">by you on <%= post.getPostDateString() %></span><br/>
 									<span class="date sub-text">
 										<a href="blab?blabid=<%= post.getId() %>"><%= post.getCommentCount() %> Comments</a>
