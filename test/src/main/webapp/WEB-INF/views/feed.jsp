@@ -95,7 +95,7 @@
 									<div class="commentText">
 										<p class=""><%= post.getContent() %></p>
 										<span class="date sub-text">
-											by <%= post.getAuthor().getBlabName() %> on <%= post.getPostDateString() %>
+											by <%= post.getAuthor().getBlabName() %> on <%= post.getPostDateString() %>by <%= ESAPI.encoder().encodeForHTMLAttribute(post.getAuthor().getBlabName()) %> on <%= ESAPI.encoder().encodeForHTMLAttribute(post.getPostDateString()) %>											by <%= post.getAuthor().getBlabName() %> on <%= post.getPostDateString() %>
 										</span>
 										<br/>
 										<span class="date sub-text">
@@ -138,7 +138,7 @@
 							%>
 							<li>
 								<div class="commentText">
-									<p class=""><%= post.getContent() %></p>
+									<p class=""><%= post.getContent() %></p><%= Encode.forHtml(post.getContent()) %>									<p class=""><%= post.getContent() %></p>
 									<span class="date sub-text">by you on <%= post.getPostDateString() %></span><br/>
 									<span class="date sub-text">
 										<a href="blab?blabid=<%= post.getId() %>"><%= post.getCommentCount() %> Comments</a>
